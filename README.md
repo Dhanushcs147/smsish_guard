@@ -37,11 +37,11 @@ No internet connection is required for inference. Everything runs locally on the
 
 🤖 ML Model
 The classifier is a logistic regression model serialised as JSON and bundled at assets/ml/model.json.
-Field                        Description
-vocab                         Map<String, int> — word to feature index
-coefficients                  List<double> — one weight per vocabulary term
-intercept                     double — bias term
-threshold                     double — decision boundary (default 0.5)
+Field                    |     Description
+vocab                    |    Map<String, int> — word to feature index
+coefficients             |     List<double> — one weight per vocabulary term
+intercept                |     double — bias term
+threshold                |     double — decision boundary (default 0.5)
 
 --> Inference steps:
 Lowercase and tokenise the SMS text
@@ -71,20 +71,21 @@ flutter run
 📱 Permissions
 
 The following Android permissions are required:
-Permission                    Purpose
-RECEIVE_SMS                   Listen for incoming SMS messages
-READ_SMS                      Scan inbox messages on app launch
-POST_NOTIFICATIONS            Display smishing alert notifications
+Permission              |     Purpose
+RECEIVE_SMS             |      Listen for incoming SMS messages
+READ_SMS                |      Scan inbox messages on app launch
+POST_NOTIFICATIONS      |      Display smishing alert notifications
+
 Runtime permission for READ_SMS is requested automatically when the app starts via permission_handler.
 
 📂 Key Files Reference
 
-File                           Description
-lib/main.dart                  Core app logic — SMS listener, heuristic filters, UI
-lib/ml/classifier.dart         Logistic regression + sigmoid inference
-lib/ml/model_loader.dart       Loads and parses model.json from assets
-lib/ml/tokenize.dart           Text tokenisation (lowercase, strip punctuation)
-lib/notification_service.dart  Push notification initialisation and display
-android/.../SmsReceiver.kt     Native BroadcastReceiver — forwards SMS to Flutter
-android/.../MainActivity.kt    EventChannel (live SMS) + MethodChannel (inbox read)
-assets/ml/model.json           Serialised ML model (vocab, weights, threshold)
+File                          | Description
+lib/main.dart                 | Core app logic — SMS listener, heuristic filters, UI
+lib/ml/classifier.dart        | Logistic regression + sigmoid inference
+lib/ml/model_loader.dart      | Loads and parses model.json from assets
+lib/ml/tokenize.dart          | Text tokenisation (lowercase, strip punctuation)
+lib/notification_service.dart | Push notification initialisation and display
+android/.../SmsReceiver.kt    | Native BroadcastReceiver — forwards SMS to Flutter
+android/.../MainActivity.kt   | EventChannel (live SMS) + MethodChannel (inbox read)
+assets/ml/model.json          | Serialised ML model (vocab, weights, threshold)
